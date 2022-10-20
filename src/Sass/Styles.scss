@@ -1,0 +1,85 @@
+
+$primary: #f60;
+$white: #fff;
+$grey: #333;
+
+
+//Importacion de estilos de bootstrap
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+
+
+body{
+    background-color: #F2F3F7;
+}
+
+.card{
+    background-color: #fff;
+}
+
+.btn-primary{
+    color:white;
+    &:hover{
+        color:white;
+    }
+}
+
+.btn-outline-primary{
+    &:hover{
+        color:$white;
+    }
+}
+
+
+
+/* Estilos del menu */
+#listMenu{
+    
+
+    a{
+        transition: color .5s;
+        &:hover{
+            color:$primary;
+        }
+        align-items: center;
+        color: $grey ;
+        text-decoration: none;
+        svg{
+            font-size: 30px;
+            padding-right: 5px;
+
+        }
+        ul{
+            list-style: none;
+            padding: 0;
+        }
+    }
+    
+    
+}
+
+
+
+/* Estilos de la seccion principal del home */
+
+#cardHomeMain{
+    ul{
+        li{
+            cursor: pointer;
+            &:hover{
+                color: $white;
+                background-color: $primary;
+            }
+        }
+    }
+}
+
+
+
+@media (min-width: 992px){
+    .navbar-expand-lg .navbar-collapse {
+        flex-basis: auto;
+         display: inline !important; 
+    }
+}
+
