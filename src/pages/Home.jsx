@@ -12,9 +12,9 @@ const Home = () => {
         dispatch(getProductsThunk());
     },[]);
 
-    console.log(products);
+   
     return (
-        <div className='container mt-5'>
+        <div className='container mt-5 pt-5'>
             <Slider />
             <div className="row mt-5 border-bottom">
                 <div className="col-md-12">

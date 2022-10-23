@@ -1,6 +1,39 @@
-import React from 'react'
-
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getToken } from '../../config/getToken';
+import { setProductGlobal } from '../../store/slices/products.slice';
 const Slider = () => {
+
+    const [categories, setCategories] = useState();
+    const dispatch = useDispatch();
+    const allProducts = useSelector(state=>state.productsGlobal);
+    useEffect(()=>{
+        axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/products/categories",getToken())
+            .then(res=>setCategories(res.data.data.categories))
+            .catch(err=>console.log(err))
+    },[]);
+
+
+
+    const getCategory = (id)=>{
+
+
+        axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/products",getToken())
+            .then(res=>{
+                let products = [];
+                res.data.data.products.map(produc=>{
+                    if (produc.category.id == id ) {
+                         
+                         products.push(produc);
+                    } 
+                })
+                dispatch(setProductGlobal(products))
+                
+            })
+            .catch(err=>console.log(err)) 
+       
+    }
     return (
         <div className='card' id='cardHomeMain'>
             <div className="row my-3">
@@ -9,11 +42,13 @@ const Slider = () => {
                         <h3>Categorias</h3>
                     </div>
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item">An item</li>
-                        <li className="list-group-item">A second item</li>
-                        <li className="list-group-item">A third item</li>
-                        <li className="list-group-item">A fourth item</li>
-                        <li className="list-group-item">And a fifth one</li>
+                        {
+                            categories?.map(categori=>(
+                                <li className="list-group-item" key={categori.id} onClick={()=>getCategory(categori.id)}>{categori.name}</li>
+                            ))
+                        }
+                        
+                 
                     </ul>
                 </div>
                 {/* https://fondosmil.com/fondo/93784.jpg */}

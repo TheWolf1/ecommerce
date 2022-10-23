@@ -3,7 +3,6 @@ $primary: #f60;
 $white: #fff;
 $grey: #333;
 
-
 //Importacion de estilos de bootstrap
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
@@ -30,6 +29,31 @@ body{
     }
 }
 
+
+
+
+
+
+
+/* Estilos de la pagina login */
+#loginContent{
+    .imgContainer{
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        //text-decoration: ;
+        img{
+            height: 100vh;
+        }
+       
+    }
+
+    .formContainer .card{
+        width: 30rem;
+    }
+
+   
+}
 
 
 /* Estilos del menu */
@@ -78,6 +102,7 @@ body{
 
 /* Estilos del CardProduct */
 .card__product{
+    
     display: flex;
     justify-content: space-between;
     overflow: hidden;
@@ -113,6 +138,39 @@ body{
 
         
     }
+    a{
+        text-decoration: none;
+    }
+   
+}
+
+
+/* Estilos de la pagina productosById */
+#productoById{
+    #containerGalery{
+      
+        #mainImage{
+            width: 300px;
+        }
+
+        .container_galery{
+            &-item{
+            
+                img{
+                    width: 100%;
+                }
+            }
+        }
+        
+
+    }
+
+   
+}
+
+
+#footer{
+    min-height: 20vh;
 }
 
 @media (min-width: 992px){
