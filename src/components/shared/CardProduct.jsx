@@ -4,7 +4,8 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { getCartThunk } from '../../store/slices/cart.slice';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
 import { getToken} from '../../config/getToken'
 import { useDispatch } from 'react-redux'
 
@@ -13,7 +14,7 @@ const CardProduct = ({ product }) => {
     const navigate = useNavigate();
     
     const dispatch = useDispatch();
-
+    const mySwal = withReactContent(Swal);
     
     const addToCart = (id)=>{
         if (localStorage.getItem('token')) {
@@ -24,7 +25,15 @@ const CardProduct = ({ product }) => {
 
             
         axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/cart",data,getToken())
-                    .then(res=>dispatch(getCartThunk()))
+                    .then(res=>{
+                        Swal.fire(
+                            'Succes!',
+                            'Prod add Succesfuly',
+                            'success'
+                          )
+                        dispatch(getCartThunk())
+                        
+                    })
                     .catch(err=>console.log(err))   
           
         } else {

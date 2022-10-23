@@ -6,6 +6,12 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import CardProduct from '../components/shared/CardProduct'
 import { getProductsThunk } from '../store/slices/products.slice'
+import { getToken } from '../config/getToken'
+import { getCartThunk } from '../store/slices/cart.slice'
+
+
+
+
 const ProductById = () => {
   const [producto, setProducto] = useState();
   const [quantity, setQuantity] = useState(1);
@@ -34,10 +40,26 @@ const ProductById = () => {
     }
 
   }
-  //console.log(producto);
 
 
-  //console.log(allProduct);
+
+  const addToCart = (id) => {
+    if (localStorage.getItem('token')) {
+      let data = {
+        id: id,
+        quantity: quantity
+      }
+
+
+      axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/cart", data, getToken())
+        .then(res => dispatch(getCartThunk()))
+        .catch(err => console.log(err))
+
+    } else {
+      navigate('/login')
+    }
+
+  }
   return (
 
     <div className='container mt-5 pt-5' id='productoById'>
@@ -99,7 +121,7 @@ const ProductById = () => {
               </div>
               <div className="infor__addcart mt-4">
 
-                <button className='btn btn-primary w-100'>
+                <button className='btn btn-primary w-100' onClick={()=>addToCart(producto?.id)}>
                   <FontAwesomeIcon icon={faShoppingCart} className="me-2" />
                   Add to Cart
                 </button>

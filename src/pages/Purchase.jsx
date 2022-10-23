@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CardShopin from '../components/shopincart/CardShopin';
+import { getSumCartThunk } from '../store/slices/sumCart.slice';
+
 
 const Purchase = () => {
     const cartProducts = useSelector(state => state.cartGlobal);
-    const [sumTot, setSumTot] = useState(0)
+    const sumTot = useSelector(state=>state.sumCartGlobal);
 
-
-   
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(getSumCartThunk())
+    },[])
     return (
         <div className='container mt-5 pt-5'>
             <div className="card">
