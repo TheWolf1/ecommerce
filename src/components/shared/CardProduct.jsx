@@ -27,7 +27,7 @@ const CardProduct = ({ product }) => {
         axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/cart",data,getToken())
                     .then(res=>{
                         Swal.fire(
-                            'Succes!',
+                            'Succes!',  
                             'Prod add Succesfuly',
                             'success'
                           )
